@@ -1,5 +1,10 @@
 // The HTML around every page: header, page tree on the left, article in the middle.
+import fs from 'node:fs';
 import { escapeHtml as esc } from './markdown.js';
+
+// The fox logo, drawn inline so it takes the text color (black / white with the theme).
+const foxSvg = fs.readFileSync(new URL('../assets/fox.svg', import.meta.url), 'utf8');
+const FOX = `<svg class="fox" viewBox="${/viewBox="([^"]+)"/.exec(foxSvg)[1]}" aria-hidden="true"><path fill="currentColor" d="${/ d="([^"]+)"/.exec(foxSvg)[1]}"/></svg>`;
 
 function treeHtml(node, currentUrl) {
   const folders = [...node.folders.values()].sort((a, b) => a.name.localeCompare(b.name));
@@ -45,6 +50,7 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(pageTitle)}</title>
+<link rel="icon" href="/assets/fox.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/serif.css">
 <link rel="stylesheet" href="/assets/katex/katex.min.css">
 <link rel="stylesheet" href="/assets/style.css">
@@ -53,7 +59,7 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
 </head>
 <body>
 <header class="top">
-  <a class="brand" href="/">${esc(site.title)}</a>
+  <a class="brand" href="/">${FOX}${esc(site.title)}</a>
   <div class="tools">
     <button class="theme" type="button" aria-label="Switch dark or light mode" title="Dark / light">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>

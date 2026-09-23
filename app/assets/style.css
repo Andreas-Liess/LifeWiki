@@ -84,6 +84,8 @@ body {
   color: var(--text);
   text-decoration: none;
 }
+.brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+.fox { height: 1.5rem; width: auto; color: var(--muted); }
 .tools { display: flex; gap: 0.25rem; }
 .theme, .menu {
   display: inline-flex; align-items: center; gap: 0.4rem;
