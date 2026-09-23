@@ -61,9 +61,6 @@ ${head}</head>
 <header class="top">
   <a class="brand" href="/">${FOX}${esc(site.title)}</a>
   <div class="tools">
-    <a class="graph-link" href="/graph${currentUrl && currentUrl !== '/graph' ? `?from=${encodeURIComponent(currentUrl)}` : ''}" aria-label="Graph of all pages" title="Graph">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M8.1 7.8l2.9 8.2M16.5 7.7l-3.4 8.4M8.2 6.8l7.6-.6"/></svg>
-    </a>
     <button class="theme" type="button" aria-label="Switch dark or light mode" title="Dark / light">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
@@ -77,8 +74,16 @@ ${head}</head>
 <div class="layout">
   <nav id="nav" class="sidebar" aria-label="All pages">
     <input id="find" type="search" placeholder="Find a page…" autocomplete="off" aria-label="Find a page">
-    ${renderTree(tree, currentUrl)}
-    <p class="none" hidden>No page found.</p>
+    <div class="sidebar-list">
+      ${renderTree(tree, currentUrl)}
+      <p class="none" hidden>No page found.</p>
+    </div>
+    <div class="sidebar-foot">
+      <a class="graph-link" href="/graph${currentUrl && currentUrl !== '/graph' ? `?from=${encodeURIComponent(currentUrl)}` : ''}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="7" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M8.1 7.8l2.9 8.2M16.5 7.7l-3.4 8.4M8.2 6.8l7.6-.6"/></svg>
+        Graph
+      </a>
+    </div>
   </nav>
   <main class="page"><div class="page-inner">
     ${crumbHtml}

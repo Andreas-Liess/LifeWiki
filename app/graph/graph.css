@@ -2,7 +2,6 @@
 .graph-page .sidebar { display: none; }
 .graph-page .layout { display: block; }
 .graph-page .page-inner { max-width: none; padding: 0; }
-.graph-page .graph-link { color: var(--text); background: var(--bg-hover); }
 
 .graph {
   position: relative;
@@ -75,7 +74,7 @@
   white-space: nowrap;
 }
 @media (max-width: 800px) {
-  .graph-page .sidebar.open { display: block; }
+  .graph-page .sidebar.open { display: flex; }
   .graph-hint { left: 1rem; }
   .graph-count { left: 1rem; }
 }
