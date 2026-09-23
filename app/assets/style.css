@@ -142,7 +142,7 @@ body {
   text-decoration: none;
 }
 .sidebar a:hover, summary:hover { background: var(--bg-hover); }
-.sidebar a[aria-current="page"] { background: var(--bg-hover); color: var(--accent); font-weight: 600; }
+.sidebar a[aria-current="page"] { background: var(--bg-hover); color: var(--text); font-weight: 600; }
 .sidebar li.leaf > a { padding-left: 1.65rem; }
 summary {
   list-style: none;
