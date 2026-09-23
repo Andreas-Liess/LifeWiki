@@ -1,0 +1,22 @@
+{
+  "name": "live-wiki",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Turns a folder of Obsidian notes into a static wiki.",
+  "type": "module",
+  "scripts": {
+    "build": "node app/build.js",
+    "dev": "node app/build.js && node app/serve.js",
+    "test": "node --test test/"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "katex": "^0.16.47",
+    "markdown-it": "^15.0.2",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-task-lists": "^2.1.1"
+  }
+}

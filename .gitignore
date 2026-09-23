@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.vercel/
+.DS_Store
+# Obsidian's personal settings stay on each computer
+content/.obsidian/
+content/.trash/
