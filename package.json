@@ -7,7 +7,7 @@
   "scripts": {
     "build": "node app/build.js",
     "dev": "node app/build.js && node app/serve.js",
-    "test": "node --test test/"
+    "test": "node --test test/*.test.js"
   },
   "engines": {
     "node": ">=18"
