@@ -90,7 +90,7 @@ test('front matter is hidden', () => {
 test('every internal link on every page leads to an existing page or file', () => {
   for (const url of result.urls.values()) {
     if (url.startsWith('/files/')) continue;
-    for (const [, href] of page(url).matchAll(/href="(\/[^"#]*)/g)) {
+    for (const [, href] of page(url).matchAll(/href="(\/[^"#?]*)/g)) {
       const target = href === '/' ? 'index.html' : href.startsWith('/files/') || href.startsWith('/assets/') ? href.slice(1) : `${href.slice(1)}.html`;
       assert.ok(fs.existsSync(path.join(out, target)), `${url} -> ${href}`);
     }

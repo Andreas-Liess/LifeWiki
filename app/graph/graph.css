@@ -1,0 +1,81 @@
+/* Graph view – only loaded on /graph. */
+.graph-page .sidebar { display: none; }
+.graph-page .layout { display: block; }
+.graph-page .page-inner { max-width: none; padding: 0; }
+.graph-page .graph-link { color: var(--text); background: var(--bg-hover); }
+
+.graph {
+  position: relative;
+  height: calc(100vh - 3.5rem);
+  height: calc(100dvh - 3.5rem);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.graph canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.graph.ready canvas { opacity: 1; }
+.graph canvas.grabbing { cursor: grabbing; }
+.graph canvas.pointing { cursor: pointer; }
+
+.graph-hint, .graph-count {
+  position: absolute;
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--faint);
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+.graph-hint { left: 1.25rem; bottom: 1rem; }
+.graph-count { left: 1.25rem; top: 1rem; font-variant-numeric: tabular-nums; }
+.graph.touched .graph-hint { opacity: 0; }
+.graph-hint-touch { display: none; }
+@media (hover: none) {
+  .graph-hint-mouse { display: none; }
+  .graph-hint-touch { display: inline; }
+}
+
+.graph-fit {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.25rem; height: 2.25rem;
+  padding: 0;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.graph-fit:hover { color: var(--text); background: var(--bg-hover); }
+.graph-fit svg { width: 1.05rem; height: 1.05rem; }
+
+.graph[data-empty="true"]::after {
+  content: "No pages yet.";
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--faint);
+}
+
+/* Readable list for screen readers; the canvas is only a picture. */
+.graph-list {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+@media (max-width: 800px) {
+  .graph-page .sidebar.open { display: block; }
+  .graph-hint { left: 1rem; }
+  .graph-count { left: 1rem; }
+}

@@ -61,7 +61,8 @@ app/build.js          reads content/, writes dist/
 app/lib/resolve.js    finds the page a link points to
 app/lib/markdown.js   Markdown → HTML (links, images, formulas)
 app/lib/layout.js     page frame: header, page list, article
-app/assets/           style.css, wiki.js (page filter, phone menu)
+app/assets/           style.css, wiki.js (page filter, phone menu), fox.svg
+app/graph/            graph view (/graph): everything for it lives here
 content/              the wiki
 test/                 tests + a small test wiki
 ```

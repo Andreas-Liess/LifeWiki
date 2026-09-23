@@ -8,6 +8,7 @@ import { createMarkdown, stripFrontMatter } from './lib/markdown.js';
 import { createResolver } from './lib/resolve.js';
 import { slugify } from './lib/slug.js';
 import { layout, renderTree } from './lib/layout.js';
+import { writeGraph } from './graph/graph.js';
 
 const APP = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.dirname(APP);
@@ -43,7 +44,7 @@ function assignUrls(notes, files) {
   const urls = new Map();
   const home = notes.find((p) => p.toLowerCase() === 'index.md');
   if (home) { urls.set(home, '/'); taken.add('/'); }
-  taken.add('/files'); taken.add('/assets'); taken.add('/404');
+  taken.add('/files'); taken.add('/assets'); taken.add('/404'); taken.add('/graph');
 
   for (const p of notes) {
     if (p === home) continue;
@@ -215,6 +216,13 @@ export function buildSite({ contentDir, outDir, config }) {
     site: config, title: 'Page not found', currentUrl: null, tree,
     body: '<p>This page does not exist. <a href="/">Go to the start page</a> or find a page in the list.</p>',
   }));
+
+  // Graph view (everything about it lives in app/graph/).
+  writeGraph({
+    outDir, config, tree,
+    pages: notes.map((p) => ({ url: urls.get(p), title: p === home ? config.title : titleOf(p), folder: folderParts(p).join('/') })),
+    links: notes.flatMap((p, i) => [...info.get(p).backlinks].map((b) => [notes.indexOf(b), i])),
+  });
 
   for (const p of files) {
     const dest = path.join(outDir, urls.get(p).slice(1));

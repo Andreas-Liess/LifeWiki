@@ -66,6 +66,10 @@ git push
 
 Get the newest version from the others first: `git pull`.
 
+## See how pages connect
+
+The graph icon at the top right shows all pages as dots and their links as lines.
+
 ## Comment on a page
 
 At the bottom of each page: **Comment on GitHub**. It opens a GitHub issue for that page.
