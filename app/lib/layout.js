@@ -47,12 +47,16 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
 <title>${esc(pageTitle)}</title>
 <link rel="stylesheet" href="/assets/katex/katex.min.css">
 <link rel="stylesheet" href="/assets/style.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
 <script src="/assets/wiki.js" defer></script>
 </head>
 <body>
 <header class="top">
   <a class="brand" href="/">${esc(site.title)}</a>
-  <button class="menu" type="button" aria-controls="nav" aria-expanded="false">Pages</button>
+  <div class="tools">
+    <button class="theme" type="button" aria-label="Switch dark or light mode">Dark / Light</button>
+    <button class="menu" type="button" aria-controls="nav" aria-expanded="false">Pages</button>
+  </div>
 </header>
 <div class="layout">
   <nav id="nav" class="sidebar" aria-label="All pages">

@@ -1,5 +1,16 @@
-// Two small helpers: the "Pages" button on phones and the page filter.
+// Small helpers: dark/light button, the "Pages" button on phones, the page filter.
 (function () {
+  var theme = document.querySelector('.theme');
+  if (theme) {
+    theme.addEventListener('click', function () {
+      var root = document.documentElement;
+      var current = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  }
+
   var nav = document.getElementById('nav');
   var menu = document.querySelector('.menu');
   if (menu && nav) {

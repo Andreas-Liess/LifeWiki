@@ -12,8 +12,9 @@
   --mark: #fff3a3;
   color-scheme: light;
 }
+/* Dark: follows the device, unless the reader picked a theme with the button. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #17181a;
     --bg-soft: #1e2023;
     --text: #e3e3e0;
@@ -26,6 +27,19 @@
     --mark: #5c5324;
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #17181a;
+  --bg-soft: #1e2023;
+  --text: #e3e3e0;
+  --muted: #a0a3a8;
+  --line: #34373b;
+  --link: #8ab4f8;
+  --link-visited: #c3a6f5;
+  --broken: #f28b82;
+  --code-bg: #232529;
+  --mark: #5c5324;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -45,15 +59,16 @@ body {
   padding: 0.6rem 1rem;
   border-bottom: 1px solid var(--line);
 }
-.brand { font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; color: var(--text); text-decoration: none; }
-.menu {
-  display: none;
+.brand, .brand:visited { font-family: Georgia, "Times New Roman", serif; font-size: 1.35rem; color: var(--text); text-decoration: none; }
+.tools { display: flex; gap: 0.5rem; }
+.menu, .theme {
   font: inherit; font-size: 0.9rem;
   padding: 0.3rem 0.8rem;
   color: var(--text); background: var(--bg-soft);
   border: 1px solid var(--line); border-radius: 4px;
   cursor: pointer;
 }
+.menu { display: none; }
 
 /* ---------- layout ---------- */
 .layout { display: flex; align-items: flex-start; }
@@ -79,7 +94,7 @@ body {
 .sidebar ul, .index-tree ul { list-style: none; margin: 0; padding-left: 0.9rem; }
 .sidebar > ul, .index-tree > ul { padding-left: 0; }
 .sidebar li { margin: 0.15rem 0; }
-.sidebar a { color: var(--text); text-decoration: none; }
+.sidebar a, .sidebar a:visited { color: var(--text); text-decoration: none; }
 .sidebar a:hover { color: var(--link); text-decoration: underline; }
 .sidebar a[aria-current="page"] { font-weight: 600; color: var(--link); }
 summary { cursor: pointer; color: var(--muted); }
