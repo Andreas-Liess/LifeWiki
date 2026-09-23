@@ -217,6 +217,16 @@ export function buildSite({ contentDir, outDir, config }) {
   fs.copyFileSync(path.join(katexDir, 'katex.min.css'), path.join(outDir, 'assets', 'katex', 'katex.min.css'));
   copyDir(path.join(katexDir, 'fonts'), path.join(outDir, 'assets', 'katex', 'fonts'));
 
+  // Heading font, served from this site (no requests to other servers).
+  const fontDir = path.join(ROOT, 'node_modules', '@fontsource-variable', 'source-serif-4');
+  fs.mkdirSync(path.join(outDir, 'assets', 'fonts', 'files'), { recursive: true });
+  fs.copyFileSync(path.join(fontDir, 'index.css'), path.join(outDir, 'assets', 'fonts', 'serif.css'));
+  for (const f of fs.readdirSync(path.join(fontDir, 'files'))) {
+    if (f.endsWith('-wght-normal.woff2')) {
+      fs.copyFileSync(path.join(fontDir, 'files', f), path.join(outDir, 'assets', 'fonts', 'files', f));
+    }
+  }
+
   return { notes, files, urls, warnings: [...new Set(warnings)] };
 }
 

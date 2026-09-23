@@ -45,6 +45,7 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(pageTitle)}</title>
+<link rel="stylesheet" href="/assets/fonts/serif.css">
 <link rel="stylesheet" href="/assets/katex/katex.min.css">
 <link rel="stylesheet" href="/assets/style.css">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
@@ -54,8 +55,14 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
 <header class="top">
   <a class="brand" href="/">${esc(site.title)}</a>
   <div class="tools">
-    <button class="theme" type="button" aria-label="Switch dark or light mode">Dark / Light</button>
-    <button class="menu" type="button" aria-controls="nav" aria-expanded="false">Pages</button>
+    <button class="theme" type="button" aria-label="Switch dark or light mode" title="Dark / light">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>
+    </button>
+    <button class="menu" type="button" aria-controls="nav" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      Pages
+    </button>
   </div>
 </header>
 <div class="layout">
@@ -64,7 +71,7 @@ export function layout({ site, title, crumbs = [], body, backlinks = [], editUrl
     ${renderTree(tree, currentUrl)}
     <p class="none" hidden>No page found.</p>
   </nav>
-  <main class="page">
+  <main class="page"><div class="page-inner">
     ${crumbHtml}
     ${showTitle ? `<h1 class="title">${esc(title)}</h1>` : ''}
     <article class="content">
@@ -72,7 +79,7 @@ ${body}
     </article>
     ${backHtml}
     ${footLinks.length ? `<footer class="page-foot">${footLinks.join(' · ')}</footer>` : ''}
-  </main>
+  </div></main>
 </div>
 </body>
 </html>
