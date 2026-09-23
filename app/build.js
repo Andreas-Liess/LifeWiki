@@ -1,6 +1,7 @@
 // Builds the wiki: reads every file in content/, writes a static website to dist/.
 // Run: npm run build
 import fs from 'node:fs';
+import { execSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createMarkdown, stripFrontMatter } from './lib/markdown.js';
@@ -73,6 +74,15 @@ function buildTree(notes, urls, home) {
   return root;
 }
 
+function currentGitBranch(root) {
+  try {
+    const b = execSync('git rev-parse --abbrev-ref HEAD', { cwd: root, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim();
+    return b && b !== 'HEAD' ? b : '';
+  } catch {
+    return '';
+  }
+}
+
 function loadConfig(root) {
   const file = path.join(root, 'site.config.json');
   const cfg = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
@@ -82,7 +92,8 @@ function loadConfig(root) {
   return {
     title: cfg.title || 'LifeWiki',
     repo: cfg.repo || envRepo,
-    branch: cfg.branch || process.env.VERCEL_GIT_COMMIT_REF || 'main',
+    // The branch this site is built from, so "Edit this page" opens the right file.
+    branch: cfg.branch || process.env.VERCEL_GIT_COMMIT_REF || currentGitBranch(root) || 'main',
     contentPath: cfg.contentPath || 'content',
   };
 }
