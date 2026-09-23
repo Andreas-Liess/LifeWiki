@@ -1,5 +1,5 @@
 {
-  "name": "live-wiki",
+  "name": "lifewiki",
   "version": "1.0.0",
   "private": true,
   "description": "Turns a folder of Obsidian notes into a static wiki.",

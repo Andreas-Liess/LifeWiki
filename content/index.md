@@ -1,4 +1,4 @@
-# Live Wiki
+# LifeWiki
 
 Our shared wiki. Every page is a Markdown file in the `content/` folder.
 

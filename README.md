@@ -1,4 +1,4 @@
-# Live Wiki
+# LifeWiki
 
 A simple wiki made from Markdown files.
 

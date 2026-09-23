@@ -80,7 +80,7 @@ function loadConfig(root) {
   const envRepo = process.env.VERCEL_GIT_REPO_OWNER && process.env.VERCEL_GIT_REPO_SLUG
     ? `${process.env.VERCEL_GIT_REPO_OWNER}/${process.env.VERCEL_GIT_REPO_SLUG}` : '';
   return {
-    title: cfg.title || 'Live Wiki',
+    title: cfg.title || 'LifeWiki',
     repo: cfg.repo || envRepo,
     branch: cfg.branch || process.env.VERCEL_GIT_COMMIT_REF || 'main',
     contentPath: cfg.contentPath || 'content',

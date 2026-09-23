@@ -6,11 +6,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { buildSite } from '../app/build.js';
 
-const out = fs.mkdtempSync(path.join(os.tmpdir(), 'live-wiki-'));
+const out = fs.mkdtempSync(path.join(os.tmpdir(), 'lifewiki-'));
 const result = buildSite({
   contentDir: new URL('./fixtures/vault', import.meta.url).pathname,
   outDir: out,
-  config: { title: 'Live Wiki', repo: 'owner/repo', branch: 'main', contentPath: 'content' },
+  config: { title: 'LifeWiki', repo: 'owner/repo', branch: 'main', contentPath: 'content' },
 });
 const page = (url) => fs.readFileSync(path.join(out, url === '/' ? 'index.html' : `${url.slice(1)}.html`), 'utf8');
 const links = page('/notes/links-test');
@@ -105,7 +105,7 @@ test('backlinks, edit and comment links', () => {
 });
 
 test('works without an index.md and with an empty wiki', () => {
-  const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'live-wiki-empty-'));
+  const empty = fs.mkdtempSync(path.join(os.tmpdir(), 'lifewiki-empty-'));
   const o = path.join(empty, 'out');
   buildSite({ contentDir: path.join(empty, 'nothing'), outDir: o, config: { title: 'W' } });
   assert.match(fs.readFileSync(path.join(o, 'index.html'), 'utf8'), /This wiki is empty/);

@@ -25,4 +25,4 @@ http.createServer((req, res) => {
   }
   res.writeHead(200, { 'content-type': TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream' });
   fs.createReadStream(file).pipe(res);
-}).listen(PORT, () => console.log(`Live Wiki: http://localhost:${PORT}`));
+}).listen(PORT, () => console.log(`LifeWiki: http://localhost:${PORT}`));
